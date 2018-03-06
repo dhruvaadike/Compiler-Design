@@ -1,0 +1,5 @@
+
+
+
+a=3;b=4;c=5;if(a>b) then if(b>c) then if(a>c) then write(a);endif;endif;endif;if(a>b) then if(a>c) then if(c>b) then write(a);endif;endif;endif;if(a<b) then if(a<c) then if(b<c) then write(c);endif;endif;endif;if(a<b)then if(a<c) then if(b>c) then write(b);endif;endif;endif;if(a>b) then if(b<c) then if(a<c) then write(c);endif;endif;endif;if(a>c) then if(c<b) then if(a<b) then write(b);endif;endif;endif;
+

@@ -1,0 +1,5 @@
+decl 
+	integer a;
+enddecl
+a=3;
+if(a>2) write(a);

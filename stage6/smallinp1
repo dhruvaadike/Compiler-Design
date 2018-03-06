@@ -1,0 +1,7 @@
+decl 
+	integer l,k,a[10];
+enddecl
+a[5]=7;
+
+k = a[5] + 5*(2-3);
+write(k);

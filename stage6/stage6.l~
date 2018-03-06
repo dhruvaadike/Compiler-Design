@@ -1,0 +1,56 @@
+%{
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
+	#include "y.tab.h"
+    #include "abstree.h"
+	int number;
+	char *temp;
+%}
+
+%%
+
+[0-9]+	{ number = atoi(yytext);yylval.nptr = TreeCreate(TYPE_INT,NODE_LEAF,NULL,number,NULL,NULL,NULL,NULL);
+			return NUM;		printf("%d ",atoi(yytext));}
+"integer"   {return INT;}
+"boolean"   {return BOOL;}
+"true"  	{yylval.nptr = TreeCreate(TYPE_BOOL,NODE_LEAF,NULL,1,NULL,NULL,NULL,NULL);return T;}
+"false" 	{yylval.nptr = TreeCreate(TYPE_BOOL,NODE_LEAF,NULL,0,NULL,NULL,NULL,NULL);return F;}
+"read"	{return READ;}
+"while" {return WHILE;}
+"do"     {return DO;}
+"decl"    	{return DECL;}
+"enddecl"	{return ENDDECL;}
+"endwhile" {return EWHILE;}
+"write"	{return WRITE;}
+"if"	{return IF;}
+"else"	{return ELSE;}
+"then"	{return THEN;}
+"endif"	{return ENDIF;}
+"<"		{return LT;}
+">"		{return GT;}
+"=="	{return DEQ;}
+[=]		{return ASGN;}
+[ \t] 	{}
+"-"		{return MINUS;}
+"+"		{return PLUS;}
+"*"		{return MUL;}
+[()] 	{return *yytext;}
+";"		{return *yytext;}
+"["		{return *yytext;}
+"]"		{return *yytext;}
+","     {return *yytext;}
+[\n] 	{}
+<<EOF>>   { return ENDPGM;}
+[a-zA-Z][a-zA-Z0-9]* {temp = (char *)malloc(sizeof(yytext));strcpy(temp,yytext);yylval.nptr = TreeCreate(TYPE_VOID,NODE_ID,temp,0,NULL,NULL,NULL,NULL);return ID;printf("--%s---\n ",temp); }
+
+. 		{yyerror("unknown character\n");exit(1);}
+
+%%
+
+int yywrap()
+{
+	return 1;
+}
+
+
